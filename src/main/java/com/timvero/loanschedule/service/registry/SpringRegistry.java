@@ -5,14 +5,16 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public interface SpringRegistry<T, E>{
 
-    default Map<E, T> createRegistry(List<? extends T> items, Function<T, E> keyExtractor) {
+public interface SpringRegistry<K, V> {
+
+    default Map<K, V> createRegistry(List<? extends V> items,
+                                     Function<V, K> keyExtractor) {
         return items.stream().collect(Collectors.toMap(
                 keyExtractor,
                 Function.identity()
         ));
     }
 
-    T get(E key);
+    V get(K key);
 }

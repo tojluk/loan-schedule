@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class LoanRegistry implements SpringRegistry<LoanCalculator, LoanType> {
+public class LoanRegistry implements SpringRegistry<LoanType, LoanCalculator> {
 
     private final Map<LoanType, LoanCalculator> loanTypeRegistry;
 
