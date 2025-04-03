@@ -2,6 +2,7 @@ package com.timvero.loanschedule.service.loan;
 
 import com.timvero.loanschedule.dto.LoanParameters;
 import com.timvero.loanschedule.dto.LoanRequest;
+import com.timvero.loanschedule.service.type.LoanType;
 import org.springframework.stereotype.Component;
 /**
  * The Class AnnuityLoanCalculator.
@@ -9,6 +10,11 @@ import org.springframework.stereotype.Component;
  */
 @Component("annuityLoanCalculator")
 public class AnnuityLoanCalculator implements LoanCalculator {
+
+    @Override
+    public LoanType getLoanType() {
+        return LoanType.ANNUITY;
+    }
 
     @Override
     public LoanParameters calculateLoanParameters(LoanRequest request) {

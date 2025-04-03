@@ -2,8 +2,11 @@ package com.timvero.loanschedule.service.schedule;
 
 import com.timvero.loanschedule.dto.LoanParameters;
 import com.timvero.loanschedule.dto.PaymentDetail;
+import com.timvero.loanschedule.service.type.ScheduleType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,15 @@ import java.util.List;
  * based on the provided loan parameters.
  */
 @Component("monthlyPaymentScheduleGenerator")
+@RequiredArgsConstructor
 public class MonthlyPaymentScheduleGenerator implements ScheduleGenerator {
+
+    private final Clock clock;
+
+    @Override
+    public ScheduleType getScheduleType() {
+        return ScheduleType.MONTHLY;
+    }
 
     /**
      * Generates a payment schedule based on the provided loan parameters.
@@ -24,7 +35,7 @@ public class MonthlyPaymentScheduleGenerator implements ScheduleGenerator {
     public List<PaymentDetail> generatePaymentSchedule(LoanParameters params) {
         List<PaymentDetail> paymentDetails = new ArrayList<>();
         double remainingBalance = params.loanAmount();
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = LocalDate.now(clock);
 
         for (int i = 1; i <= params.termInMonths(); i++) {
             double interestForMonth = remainingBalance * params.monthlyInterestRate();

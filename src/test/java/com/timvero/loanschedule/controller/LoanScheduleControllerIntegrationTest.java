@@ -1,11 +1,14 @@
 package com.timvero.loanschedule.controller;
 
+import com.timvero.loanschedule.configuration.TestClockConfig;
 import com.timvero.loanschedule.dto.LoanRequest;
 import com.timvero.loanschedule.dto.LoanResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -14,6 +17,8 @@ import static com.timvero.loanschedule.fixture.LoanResponseData.buildSampleLoanR
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(TestClockConfig.class)
+@ActiveProfiles("test")
 class LoanScheduleControllerIntegrationTest {
 
     private static final String API_ENDPOINT = "/api/v1/loan/schedule";
