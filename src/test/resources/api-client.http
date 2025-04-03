@@ -5,5 +5,7 @@ Content-Type: application/json
 {
   "amount": 103045,
   "interestRate": 8,
-  "termInMonths": -12
+  "termInMonths": 12,
+  "loanType": "ANNUITY",
+  "scheduleType": "MONTHLY"
 }

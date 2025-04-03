@@ -1,5 +1,7 @@
 package com.timvero.loanschedule.dto;
 
+import com.timvero.loanschedule.service.type.LoanType;
+import com.timvero.loanschedule.service.type.ScheduleType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -25,5 +27,17 @@ public record LoanRequest(
         @Schema(description = "Loan term in months", example = "12")
         @NotNull(message = "Loan term is required")
         @Min(value = 1, message = "Loan term must be at least 1 month")
-        Integer termInMonths
+        Integer termInMonths,
+
+        @Schema(description = "Loan type",
+                example = "ANNUITY",
+                allowableValues = {"ANNUITY"})
+        @NotNull(message = "Loan type is required")
+        LoanType loanType,
+
+        @Schema(description = "Schedule type",
+                example = "MONTHLY",
+                allowableValues = {"MONTHLY"})
+        @NotNull(message = "Schedule type is required")
+        ScheduleType scheduleType
 ) {}

@@ -4,6 +4,8 @@ import com.timvero.loanschedule.dto.LoanParameters;
 import com.timvero.loanschedule.dto.LoanRequest;
 import com.timvero.loanschedule.dto.LoanResponse;
 import com.timvero.loanschedule.service.loan.LoanCalculator;
+import com.timvero.loanschedule.service.registry.LoanRegistry;
+import com.timvero.loanschedule.service.registry.ScheduleRegistry;
 import com.timvero.loanschedule.service.schedule.ScheduleGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +28,12 @@ import static org.mockito.Mockito.when;
 class LoanScheduleServiceUnitTest {
 
     @Mock
+    private LoanRegistry loanRegistry;
+
+    @Mock
+    private ScheduleRegistry scheduleRegistry;
+
+    @Mock
     private LoanCalculator annuityLoanCalculator;
 
     @Mock
@@ -40,6 +48,8 @@ class LoanScheduleServiceUnitTest {
         LoanRequest givenRequest = buildLoanRequestValidSimple().build();
         LoanResponse expectedResponse = buildSampleLoanResponse().build();
         LoanParameters givenLoanParameters = buildLoanParametersSimple().build();
+        when(loanRegistry.get(givenRequest.loanType())).thenReturn(annuityLoanCalculator);
+        when(scheduleRegistry.get(givenRequest.scheduleType())).thenReturn(monthlyScheduleGenerator);
         when(annuityLoanCalculator.calculateLoanParameters(any(LoanRequest.class)))
                 .thenReturn(givenLoanParameters);
         when(monthlyScheduleGenerator.generatePaymentSchedule(any(LoanParameters.class)))
@@ -54,6 +64,9 @@ class LoanScheduleServiceUnitTest {
                                              assertThat(actual).usingRecursiveComparison().isEqualTo(expectedResponse)
                     )
                     .verifyComplete();
+
+        verify(loanRegistry).get(givenRequest.loanType());
+        verify(scheduleRegistry).get(givenRequest.scheduleType());
         ArgumentCaptor<LoanRequest> loanRequestCaptor = ArgumentCaptor.forClass(LoanRequest.class);
         verify(annuityLoanCalculator).calculateLoanParameters(loanRequestCaptor.capture());
         assertThat(loanRequestCaptor.getValue()).usingRecursiveComparison().isEqualTo(givenRequest);

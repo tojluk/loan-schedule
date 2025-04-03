@@ -4,10 +4,9 @@ import com.timvero.loanschedule.dto.LoanParameters;
 import com.timvero.loanschedule.dto.LoanRequest;
 import com.timvero.loanschedule.dto.LoanResponse;
 import com.timvero.loanschedule.dto.PaymentDetail;
-import com.timvero.loanschedule.service.loan.LoanCalculator;
-import com.timvero.loanschedule.service.schedule.ScheduleGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.timvero.loanschedule.service.registry.LoanRegistry;
+import com.timvero.loanschedule.service.registry.ScheduleRegistry;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -18,18 +17,11 @@ import java.util.List;
  * It uses a LoanCalculator to calculate loan parameters and a ScheduleGenerator to generate the payment schedule.
  */
 @Service
+@RequiredArgsConstructor
 public class LoanScheduleService {
 
-    //TODO add map with types of loans and schedules
-    private final LoanCalculator annuityLoanCalculator;
-    private final ScheduleGenerator monthlyScheduleGenerator;
-
-    @Autowired
-    public LoanScheduleService(@Qualifier("annuityLoanCalculator") LoanCalculator annuityLoanCalculator,
-                               @Qualifier("monthlyPaymentScheduleGenerator") ScheduleGenerator monthlyScheduleGenerator) {
-        this.annuityLoanCalculator = annuityLoanCalculator;
-        this.monthlyScheduleGenerator = monthlyScheduleGenerator;
-    }
+    private final LoanRegistry loanRegistry;
+    private final ScheduleRegistry scheduleRegistry;
 
     /**
      * Calculates the loan schedule based on the provided loan request.
@@ -40,8 +32,10 @@ public class LoanScheduleService {
     public Mono<LoanResponse> calculateLoanSchedule(LoanRequest loanRequest) {
         return Mono.fromCallable(() -> {
 
-            LoanParameters parameters = annuityLoanCalculator.calculateLoanParameters(loanRequest);
-            List<PaymentDetail> paymentDetails = monthlyScheduleGenerator.generatePaymentSchedule(parameters);
+            LoanParameters parameters = loanRegistry.get(loanRequest.loanType())
+                                                    .calculateLoanParameters(loanRequest);
+            List<PaymentDetail> paymentDetails = scheduleRegistry.get(loanRequest.scheduleType())
+                                                                 .generatePaymentSchedule(parameters);
 
             return new LoanResponse(
                     parameters.loanAmount(),
