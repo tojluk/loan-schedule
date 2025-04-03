@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ScheduleRegistry implements SpringRegistry<ScheduleGenerator, ScheduleType> {
+public class ScheduleRegistry implements SpringRegistry<ScheduleType, ScheduleGenerator> {
 
     private final Map<ScheduleType, ScheduleGenerator> scheduleTypeRegistry;
 
