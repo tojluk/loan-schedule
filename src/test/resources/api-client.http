@@ -2,10 +2,268 @@
 POST http://localhost:8080/api/v1/loan/schedule
 Content-Type: application/json
 
+
 {
-  "amount": 103045,
-  "interestRate": 8,
-  "termInMonths": 12,
-  "loanType": "ANNUITY",
-  "scheduleType": "MONTHLY"
+  "newServiceRequest": {
+    "timePointTerms": [
+      {
+        "dateTime": 1742979650000,
+        "timePointRoleCode": "003"
+      }
+    ],
+    "serviceRequestId": "7000396240",
+    "notes": [
+      {
+        "noteTypeCode": "001",
+        "noteContent": "TEST COMMENT 147",
+        "noteTypeDesc": "Comment"
+      }
+    ],
+    "serviceRequestPartyInfo": [
+      {
+        "partyRoleCode": "PF0001",
+        "communicationMethodCode": "03",
+        "contact": [
+          {
+            "phoneNum": {
+              "number": "0888888877",
+              "type": "03"
+            }
+          },
+          {
+            "email": {
+              "address": "KYRIL.ALBERT@STANDARDBANK.CO.ZA",
+              "type": "04"
+            }
+          }
+        ],
+        "communicationMethodName": "FAX",
+        "partyId": "532635003"
+      }
+    ],
+    "resolution": {
+      "resolutionCommunicationMethodCode": "04",
+      "resolutionCommunicationMethodName": "INTERNET:EMAIL"
+    },
+    "basicInfo": {
+      "recievedViaCode": "012"
+    },
+    "customerMood": {
+      "preResolutionMoodCode": "001",
+      "preResolutionMoodName": "Unhappy"
+    },
+    "serviceRequestStatus": {
+      "userStatus": [
+        {
+          "statusDesc": "Validation",
+          "activeInd": true,
+          "statusCode": "0029"
+        }
+      ],
+      "lifeCycleStatusCode": "1",
+      "lifeCycleStatusName": "Open"
+    },
+    "serviceRequestCategory": {
+      "serviceTreeId": "Z_SBSA_QC_SERVICE_TREE_V4",
+      "catalogueType": "D",
+      "categoryId": "D297",
+      "categoryDesc": "Cash Jam"
+    }
+  },
+  "oldServiceRequest": {
+    "timePointTerms": [
+      {
+        "timePointRoleName": "Date Created",
+        "dateTime": 1746531663000,
+        "timePointRoleCode": "006"
+      }
+    ],
+    "serviceRequestId": "7000396240",
+    "mandateObtained": false,
+    "notes": [],
+    "impactName": "NFCR",
+    "serviceRequestPartyInfo": [
+      {
+        "languageTypeName": "ENGLISH",
+        "partyRoleCode": "PF0001",
+        "mainIndicator": true,
+        "language": "E",
+        "partyRoleName": "Sold-To Party",
+        "communicationMethodCode": "01",
+        "contact": [
+          {
+            "phoneNum": {
+              "number": "0888888877",
+              "type": "01"
+            }
+          },
+          {
+            "email": {
+              "address": "testaddress@standardbank.co.za"
+            }
+          }
+        ],
+        "partyName": "Mrs.III III ITM AO LEGACYZ",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "533640033",
+        "resolutionCommunicationMethodCode": "01",
+        "resolutionCommunicationMethodName": "PHONE NUMBER"
+      },
+      {
+        "languageTypeName": "ENGLISH",
+        "partyRoleCode": "PF0002",
+        "mainIndicator": true,
+        "language": "E",
+        "partyRoleName": "Employee Responsible",
+        "loginName": "C876284",
+        "communicationMethodCode": "01",
+        "contact": [],
+        "partyName": "KYRIL K ALBERT",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "536097515"
+      },
+      {
+        "languageTypeName": "ENGLISH",
+        "partyRoleCode": "PF0005",
+        "queueId": "DEFAULT",
+        "mainIndicator": true,
+        "language": "E",
+        "partyRoleName": "Responsible Organization",
+        "queueName": "DEFAULT",
+        "communicationMethodCode": "01",
+        "contact": [
+          {
+            "phoneNum": {
+              "number": "0860101341",
+              "type": "01"
+            }
+          },
+          {
+            "phoneNum": {
+              "number": "+27118838623",
+              "type": "03"
+            }
+          }
+        ],
+        "partyName": "SANDTON CITY",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "OU50054242"
+      },
+      {
+        "partyRoleCode": "PF0008",
+        "mainIndicator": true,
+        "partyRoleName": "Originating Consultant",
+        "communicationMethodCode": "01",
+        "contact": [],
+        "partyName": "KYRIL K ALBERT",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "536097515"
+      },
+      {
+        "languageTypeName": "ENGLISH",
+        "partyRoleCode": "PF0009",
+        "mainIndicator": true,
+        "language": "E",
+        "partyRoleName": "Originating Organisation",
+        "communicationMethodCode": "01",
+        "contact": [
+          {
+            "phoneNum": {
+              "number": "0860101341",
+              "type": "01"
+            }
+          },
+          {
+            "phoneNum": {
+              "number": "+27118838623",
+              "type": "03"
+            }
+          }
+        ],
+        "partyName": "SANDTON CITY",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "OU50054242"
+      },
+      {
+        "languageTypeName": "ENGLISH",
+        "partyRoleCode": "PF0037",
+        "mainIndicator": true,
+        "language": "E",
+        "partyRoleName": "Alternate Contact",
+        "communicationMethodCode": "01",
+        "contact": [],
+        "partyName": "Mrs. III III ITM AO LEGACYZ",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "533640033"
+      },
+      {
+        "languageTypeName": "AFRIKAANS",
+        "partyRoleCode": "PF0039",
+        "mainIndicator": true,
+        "language": "A",
+        "partyRoleName": "Account Executive",
+        "loginName": "A064021",
+        "communicationMethodCode": "01",
+        "contact": [],
+        "partyName": "MISS Rianie Y Human",
+        "communicationMethodName": "PHONE NUMBER",
+        "newParty": false,
+        "partyId": "455950257"
+      }
+    ],
+    "resolution": {
+      "resolutionCommunicationMethodCode": "01",
+      "resolutionCommunicationMethodName": "PHONE NUMBER"
+    },
+    "basicInfo": {
+      "recievedViaCode": "001",
+      "serviceRequestId": "7000396240",
+      "description": "Cash Jam",
+      "timeLeft": "510 MINUTE(S)",
+      "recievedViaDescription": "In Person"
+    },
+    "reference": [],
+    "msgGroupReference": "792afd53-e232-43ef-800b-8156e4f57065",
+    "attachment": [],
+    "loginName": "C876284",
+    "impactCode": "91",
+    "durationTermsType": [
+      {
+        "duration": {
+          "unit": "MIN",
+          "count": 510
+        },
+        "durationRoleCode": "004",
+        "durationUnitDesc": "MINUTE(S)",
+        "durationRoleName": "Duration Until Service End"
+      }
+    ],
+    "additionalServiceRequestInfo": [],
+    "serviceRequestStatus": {
+      "userStatus": [
+        {
+          "statusDesc": "Open",
+          "activeInd": true,
+          "statusCode": "0001"
+        }
+      ],
+      "lifeCycleStatusCode": "2",
+      "lifeCycleStatusName": "In Process"
+    },
+    "serviceRequestCategory": {
+      "serviceTreeId": "Z_SBSA_QC_SERVICE_TREE_V4",
+      "catalogueType": "D",
+      "hierarchyLevel": 0,
+      "categoryId": "D297",
+      "categoryDesc": "Cash Jam"
+    },
+    "consentObtained": false
+  }
 }
+

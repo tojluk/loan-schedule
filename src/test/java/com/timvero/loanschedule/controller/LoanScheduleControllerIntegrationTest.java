@@ -1,8 +1,8 @@
 package com.timvero.loanschedule.controller;
 
 import com.timvero.loanschedule.configuration.TestClockConfig;
-import com.timvero.loanschedule.dto.LoanRequest;
-import com.timvero.loanschedule.dto.LoanResponse;
+import com.timvero.loanschedule.infra.dto.LoanRequest;
+import com.timvero.loanschedule.infra.dto.LoanResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ class LoanScheduleControllerIntegrationTest {
     private WebTestClient webTestClient;
 
     @Test
-    void shouldReturnValidLoanResponse_whenGetAnnuityLoanSchedule_givenValidLoanRequest() {
+    void shouldReturnLoanResponse_whenSchedule_givenValidAnnuityLoanAndMonthlyPayments() {
         // given
         LoanRequest givenRequest = buildLoanRequestValidSimple().build();
         LoanResponse expected = buildSampleLoanResponse().build();
