@@ -1,4 +1,4 @@
-package com.timvero.loanschedule.infra.controller;
+package com.timvero.loanschedule.infra.adaptor.in.controller;
 
 import com.timvero.loanschedule.infra.dto.LoanRequest;
 import com.timvero.loanschedule.infra.dto.LoanResponse;
@@ -30,6 +30,5 @@ public class LoanScheduleController {
     public Mono<LoanResponse> calculateLoanSchedule(@RequestBody @Valid LoanRequest loanRequest) {
          return loanScheduleAppService.calculateLoanSchedule(loanRequest);
     }
-
 
 }
