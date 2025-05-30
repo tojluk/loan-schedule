@@ -1,9 +1,9 @@
 package com.timvero.loanschedule.fixture;
 
 
-import com.timvero.loanschedule.dto.LoanRequest;
-import com.timvero.loanschedule.service.type.LoanType;
-import com.timvero.loanschedule.service.type.ScheduleType;
+import com.timvero.loanschedule.infra.dto.LoanRequest;
+import com.timvero.loanschedule.domain.loan.model.values.LoanType;
+import com.timvero.loanschedule.domain.schedule.model.ScheduleType;
 
 public class LoanRequestData {
 
