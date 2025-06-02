@@ -7,8 +7,10 @@ import com.timvero.loanschedule.domain.loan.port.in.LoanCalculator;
 import com.timvero.loanschedule.domain.loan.port.in.LoanResult;
 import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleCommand;
 import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleResult;
-import com.timvero.loanschedule.domain.shared.event.LoanScheduleCalculatedEvent;
-import com.timvero.loanschedule.domain.shared.port.out.DomainEventPublisher;
+import com.timvero.loanschedule.domain.shared.port.out.event.CalculatedDomainEvent;
+import com.timvero.loanschedule.domain.shared.port.out.event.DomainEventPublisherPort;
+import com.timvero.loanschedule.domain.shared.port.out.schedule.DomainScheduleTaskPort;
+import com.timvero.loanschedule.domain.shared.port.out.schedule.NotifyDomainScheduledTask;
 import com.timvero.loanschedule.infra.dto.LoanRequest;
 import com.timvero.loanschedule.infra.dto.LoanResponse;
 import com.timvero.loanschedule.infra.dto.PaymentDetail;
@@ -29,7 +31,8 @@ public class LoanScheduleAppService {
 
     private final LoanCalculator loanCalculator ;
     private final LoanScheduleRegistry loanScheduleRegistry;
-    private final DomainEventPublisher domainEventPublisher;
+    private final DomainEventPublisherPort domainEventPublisherPort;
+    private final DomainScheduleTaskPort scheduleTask;
 
     /**
      * Calculates the loan schedule based on the provided loan request.
@@ -47,7 +50,9 @@ public class LoanScheduleAppService {
 
             List<PaymentDetail> paymentDetails = PaymentDetailMapper.mapLoanScheduleResultsToPaymentDetails(loanScheduleResult);
 
-            domainEventPublisher.publishLoanScheduleEvent(new LoanScheduleCalculatedEvent(UUID.randomUUID().toString()));
+            String loanId = UUID.randomUUID().toString();
+            domainEventPublisherPort.publishLoanScheduleEvent(new CalculatedDomainEvent(loanId));
+            scheduleTask.schedule(new NotifyDomainScheduledTask(loanId, 1L));
 
             return LoanMapper.mapLoanResultToLoanResponse(loanResult, paymentDetails);
         });
