@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
+
 /**
  * LoanScheduleController is a REST controller that handles loan schedule-related operations.
  * It provides an endpoint for calculating the loan schedule based on the provided request.
@@ -28,7 +29,7 @@ public class LoanScheduleController {
     @PostMapping(value = "/schedule", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Calculate loan schedule")
     public Mono<LoanResponse> calculateLoanSchedule(@RequestBody @Valid LoanRequest loanRequest) {
-         return loanScheduleAppService.calculateLoanSchedule(loanRequest);
+        return loanScheduleAppService.calculateLoanSchedule(loanRequest);
     }
 
 }
