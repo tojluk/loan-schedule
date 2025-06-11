@@ -1,0 +1,40 @@
+package com.timvero.loanschedule.domain.shared.port.out.persistance;
+
+import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleResultDomain;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
+
+import java.time.LocalDate;
+
+/**
+ * PaymentDetailDto is a record that represents the details of a payment in a loan schedule.
+ * It includes information such as payment number, date, amount, principal amount,
+ * interest amount, and remaining balance.
+ */
+@Builder
+public record LoanPaymentsDetailsPersistenceCommand(
+        @Schema(description = "Payment number", example = "1")
+        int paymentNumber,
+        @Schema(description = "Payment date", example = "2023-10-01")
+        LocalDate paymentDate,
+        @Schema(description = "Payment amount", example = "1000.00")
+        double paymentAmount,
+        @Schema(description = "Principal amount", example = "800.00")
+        double principalAmount,
+        @Schema(description = "Interest amount", example = "200.00")
+        double interestAmount,
+        @Schema(description = "Remaining balance", example = "20000.00")
+        double remainingBalance
+) {
+
+        public static LoanPaymentsDetailsPersistenceCommand of(LoanScheduleResultDomain result) {
+            return LoanPaymentsDetailsPersistenceCommand.builder()
+                    .paymentNumber(result.paymentNumber())
+                    .paymentDate(result.paymentDate())
+                    .paymentAmount(result.paymentAmount())
+                    .principalAmount(result.principalAmount())
+                    .interestAmount(result.interestAmount())
+                    .remainingBalance(result.remainingBalance())
+                    .build();
+        }
+}

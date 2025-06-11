@@ -1,6 +1,6 @@
 package com.timvero.loanschedule.fixture;
 
-import com.timvero.loanschedule.domain.loan.port.in.LoanResult;
+import com.timvero.loanschedule.domain.loan.port.in.LoanResultDomain;
 import com.timvero.loanschedule.infra.dto.LoanParameters;
 
 public class LoanParametersData {
@@ -16,8 +16,8 @@ public class LoanParametersData {
                 .totalInterest(272.8978146160953);
     }
 
-    public static LoanResult.LoanResultBuilder buildLoanResults() {
-        return LoanResult.builder()
+    public static LoanResultDomain.LoanResultDomainBuilder buildLoanResults() {
+        return LoanResultDomain.builder()
                 .loanAmount(10000.0)
                 .annualInterestRate(5.0)
                 .monthlyInterestRate(5.0 / 12 / 100)

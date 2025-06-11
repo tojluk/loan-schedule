@@ -7,7 +7,7 @@ import lombok.ToString;
 @ToString
 public class NotifyDomainScheduledTask implements DomainScheduledTask {
 
-    private final String loanId;
+    private final long loanId;
     private final long delayInSeconds;
 
     @Override

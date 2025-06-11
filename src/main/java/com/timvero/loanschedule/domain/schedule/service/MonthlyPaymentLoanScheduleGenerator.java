@@ -2,7 +2,7 @@ package com.timvero.loanschedule.domain.schedule.service;
 
 import com.timvero.loanschedule.domain.schedule.model.ScheduleType;
 import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleCommand;
-import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleResult;
+import com.timvero.loanschedule.domain.schedule.port.in.LoanScheduleResultDomain;
 import com.timvero.loanschedule.domain.schedule.port.in.ScheduleGenerator;
 import com.timvero.loanschedule.infra.dto.LoanParameters;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +34,8 @@ public class MonthlyPaymentLoanScheduleGenerator implements ScheduleGenerator {
      * @return a list of payment details for each month
      */
     @Override
-    public List<LoanScheduleResult> generatePaymentSchedule(LoanScheduleCommand params) {
-        List<LoanScheduleResult> paymentDetails = new ArrayList<>();
+    public List<LoanScheduleResultDomain> generatePaymentSchedule(LoanScheduleCommand params) {
+        List<LoanScheduleResultDomain> paymentDetails = new ArrayList<>();
         double remainingBalance = params.loanAmount();
         LocalDate currentDate = LocalDate.now(clock);
 
@@ -49,7 +49,7 @@ public class MonthlyPaymentLoanScheduleGenerator implements ScheduleGenerator {
             }
 
             LocalDate paymentDate = currentDate.plusMonths(i);
-            paymentDetails.add(new LoanScheduleResult(
+            paymentDetails.add(new LoanScheduleResultDomain(
                     i,
                     paymentDate,
                     params.monthlyPayment(),
