@@ -1,5 +1,6 @@
 package com.timvero.loanschedule.domain.schedule.port.in;
 
+import com.timvero.loanschedule.domain.loan.port.in.LoanResultDomain;
 import lombok.Builder;
 
 /**
@@ -16,4 +17,17 @@ public record LoanScheduleCommand(
     double monthlyPayment,
     double totalPayment,
     double totalInterest
-) {}
+) {
+
+    public static LoanScheduleCommand of(LoanResultDomain loanResult) {
+            return LoanScheduleCommand.builder()
+                    .loanAmount(loanResult.loanAmount())
+                    .annualInterestRate(loanResult.annualInterestRate())
+                    .monthlyInterestRate(loanResult.monthlyInterestRate())
+                    .termInMonths(loanResult.termInMonths())
+                    .monthlyPayment(loanResult.monthlyPayment())
+                    .totalPayment(loanResult.totalPayment())
+                    .totalInterest(loanResult.totalInterest())
+                    .build();
+    }
+}

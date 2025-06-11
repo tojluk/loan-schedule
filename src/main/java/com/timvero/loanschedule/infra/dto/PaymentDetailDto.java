@@ -1,17 +1,20 @@
-package com.timvero.loanschedule.domain.schedule.port.in;
+package com.timvero.loanschedule.infra.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
 import java.time.LocalDate;
-
 /**
- * PaymentDetail is a record that represents the details of a payment in a loan schedule.
+ * PaymentDetailDto is a record that represents the details of a payment in a loan schedule.
  * It includes information such as payment number, date, amount, principal amount,
  * interest amount, and remaining balance.
  */
 @Builder
-public record LoanScheduleResult(
+public record PaymentDetailDto(
+        @Schema(description = "Unique identifier for the payment", example = "12345")
+        long paymentDetailId,
+        @Schema(description = "Loan ID", example = "67890")
+        long loanId,
         @Schema(description = "Payment number", example = "1")
         int paymentNumber,
         @Schema(description = "Payment date", example = "2023-10-01")

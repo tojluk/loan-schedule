@@ -1,8 +1,11 @@
 package com.timvero.loanschedule.infra.adaptor.in.controller;
 
+import com.timvero.loanschedule.application.dto.LoanRequestAppDto;
+import com.timvero.loanschedule.application.dto.LoanResponseAppDto;
+import com.timvero.loanschedule.application.service.LoanScheduleAppService;
 import com.timvero.loanschedule.infra.dto.LoanRequest;
 import com.timvero.loanschedule.infra.dto.LoanResponse;
-import com.timvero.loanschedule.application.service.LoanScheduleAppService;
+import com.timvero.loanschedule.infra.mapper.LoanInfraMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -25,11 +28,14 @@ import reactor.core.publisher.Mono;
 public class LoanScheduleController {
 
     private final LoanScheduleAppService loanScheduleAppService;
+    private final LoanInfraMapper loanInfraMapper;
 
     @PostMapping(value = "/schedule", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Calculate loan schedule")
     public Mono<LoanResponse> calculateLoanSchedule(@RequestBody @Valid LoanRequest loanRequest) {
-        return loanScheduleAppService.calculateLoanSchedule(loanRequest);
+        LoanRequestAppDto appCommand = loanInfraMapper.toLoanCommand(loanRequest);
+        Mono<LoanResponseAppDto> appResponse = loanScheduleAppService.calculateLoanSchedule(appCommand);
+        return appResponse.map(loanInfraMapper::toLoanResponse);
     }
 
 }

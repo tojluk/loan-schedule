@@ -1,7 +1,7 @@
 package com.timvero.loanschedule.domain.loan.model;
 
 import com.timvero.loanschedule.domain.loan.model.values.LoanType;
-import com.timvero.loanschedule.domain.loan.port.in.LoanResult;
+import com.timvero.loanschedule.domain.loan.port.in.LoanResultDomain;
 import lombok.experimental.SuperBuilder;
 
 /**
@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 public class AnnuityLoan extends Loan {
 
     @Override
-    public LoanResult calculateLoanParameters() {
+    public LoanResultDomain calculateLoanParameters() {
         double loanAmount = getAmount().value();
         double annualInterestRate = getInterestRate().value();
         int termInMonths = getTerm().value();
@@ -22,7 +22,7 @@ public class AnnuityLoan extends Loan {
                                 (Math.pow(1 + monthlyInterestRate, termInMonths) - 1);
         double totalPayment = monthlyPayment * termInMonths;
         double totalInterest = totalPayment - loanAmount;
-        return new LoanResult(
+        return new LoanResultDomain(
                 loanAmount,
                 annualInterestRate,
                 monthlyInterestRate,

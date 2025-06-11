@@ -5,6 +5,28 @@ spring:
   application:
     name: loan-schedule
 
+  # R2DBC Configuration
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb
+    username: sa
+    password: password
+
+  # H2 Console Configuration (optional, for debugging)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+    org.springframework.boot.autoconfigure.r2dbc: DEBUG
+    org.springframework.data.r2dbc: DEBUG
+
 # OpenAPI 3
 springdoc:
   swagger-ui:

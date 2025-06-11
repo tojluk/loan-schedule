@@ -1,4 +1,4 @@
-package com.timvero.loanschedule.infra.dto;
+package com.timvero.loanschedule.application.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import java.util.List;
  * total interest, total payment, and a list of payment details.
  */
 @Builder
-public record LoanResponse(
+public record LoanResponseAppDto(
         @Schema(description = "Unique identifier for the loan", example = "12345")
         long loanId,
         @Schema(description = "Loan amount", example = "10000")
@@ -26,5 +26,5 @@ public record LoanResponse(
         @Schema(description = "Total payment", example = "11322.60")
         double totalPayment,
         @Schema(description = "List of payment details")
-        List<PaymentDetailDto> paymentDetails
+        List<PaymentDetailsAppDto> paymentDetails
 ) {}

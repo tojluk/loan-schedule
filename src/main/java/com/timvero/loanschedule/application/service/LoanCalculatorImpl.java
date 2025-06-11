@@ -3,7 +3,7 @@ package com.timvero.loanschedule.application.service;
 import com.timvero.loanschedule.application.factory.LoanFactory;
 import com.timvero.loanschedule.domain.loan.port.in.LoanCalculator;
 import com.timvero.loanschedule.domain.loan.port.in.LoanCommand;
-import com.timvero.loanschedule.domain.loan.port.in.LoanResult;
+import com.timvero.loanschedule.domain.loan.port.in.LoanResultDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 /**
@@ -17,7 +17,7 @@ public class LoanCalculatorImpl implements LoanCalculator {
     private final LoanFactory loanFactory;
 
     @Override
-    public LoanResult calculate(LoanCommand command) {
+    public LoanResultDomain calculate(LoanCommand command) {
         return loanFactory.createLoan(command).calculateLoanParameters();
     }
 }

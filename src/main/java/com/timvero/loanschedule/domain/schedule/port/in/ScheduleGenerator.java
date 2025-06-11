@@ -8,5 +8,5 @@ import java.util.List;
  */
 public interface ScheduleGenerator {
     ScheduleType getScheduleType();
-    List<LoanScheduleResult> generatePaymentSchedule(LoanScheduleCommand loanParameters);
+    List<LoanScheduleResultDomain> generatePaymentSchedule(LoanScheduleCommand loanParameters);
 }
